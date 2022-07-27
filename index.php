@@ -15,8 +15,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="keywords" content="Electronic Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 	SmartPhone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-	function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<script type="application/x-javascript">
+		addEventListener("load", function() {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
 	<!-- //for-mobile-apps -->
 	<!-- Custom Theme files -->
 	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
@@ -35,19 +42,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- //js -->
 	<!-- web fonts -->
 	<link href='//fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
-	<link
-		href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
-		rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 	<!-- //web fonts -->
 	<!-- start-smooth-scrolling -->
 	<script type="text/javascript">
-		jQuery(document).ready(function ($) {
-			$(".scroll").click(function (event) {
+		jQuery(document).ready(function($) {
+			$('#blur').fadeOut(8000);
+			$('#blurr').fadeOut(8000);
+		});
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event) {
 				event.preventDefault();
-				$('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+				$('html,body').animate({
+					scrollTop: $(this.hash).offset().top
+				}, 1000);
 			});
 		});
-		$(document).ready(function () {
+		$(document).ready(function() {
 			var $register = $('#rform');
 			$register.validate({
 				rules: {
@@ -64,6 +75,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 				},
 				messages: {
+					errorpopup: true,
 					cpassword: {
 						equalTo: "please enter same password"
 					}
@@ -71,157 +83,60 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			});
 
 		});
-
-		$(document).ready(function () {
-				$('#rform').validate({
-					rules: {
-						PhoneNumber: 'customphone',
-					},
-					messages:{
-						PhoneNumber:"Please enter a valid phone number"
-					}
-				});
-			});
-
-		$.validator.addMethod('customphone', function (value, element) {
-
-			return this.optional(element) || /^[0-9 +-]+$/.test(value);
-
-		});
-
 	</script>
 
 	<!-- //end-smooth-scrolling -->
 </head>
 
 <body>
+
 	<!-- for bootstrap working -->
 	<script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
 	<!-- //for bootstrap working -->
 	<!-- header modal -->
-	<div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;</button>
-					<h4 class="modal-title" id="myModalLabel">Don't Wait, Login now!</h4>
-				</div>
-				<div class="modal-body modal-body-sub">
-					<div class="row">
-						<div class="col-md-8 modal_body_left modal_body_left1"
-							style="border-right: 1px dotted #C2C2C2;padding-right:3em;">
-							<div class="sap_tabs">
-								<div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
-									<ul>
-										<li class="resp-tab-item" aria-controls="tab_item-0"><span>Sign in</span></li>
-										<li class="resp-tab-item" aria-controls="tab_item-1"><span>Sign up</span></li>
-									</ul>
-									<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
-										<div class="facts">
-											<div class="register">
-												<form id="lform" action="login_validate.php" method="post">
-													<input name="Email" placeholder="Email Address" type="text"
-														required="">
-													<input name="Password" placeholder="Password" type="password"
-														required="" minlength="5">
-													<div class="sign-up">
-														<input type="submit" value="Sign in" />
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
-									<div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
-										<div class="facts">
-											<div class="register">
-												<form id="rform" action="registration_valid.php" method="post">
-													<input placeholder="First Name" name="FirstName" type="text"
-														required="">
-													<input placeholder="Last Name" name="LastName" type="text"
-														required="">
-													<input placeholder="Email Address" name="Email" type="email"
-														required="">
-													<input placeholder="Phone Number" name="PhoneNumber" type="text"
-														id="phonenumber" required="">
-													<input placeholder="Password" name="Password" id="Password"
-														type="password" required="">
-													<input placeholder="Confirm Password" name="cpassword"
-														type="password" required="">
-													<input name="file" type="file" required="">
-													<div class="sign-up">
-														<input type="submit" value="Create Account" />
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
-							<script type="text/javascript">
-								$(document).ready(function () {
-									$('#horizontalTab').easyResponsiveTabs({
-										type: 'default', //Types: default, vertical, accordion           
-										width: 'auto', //auto or any width like 600px
-										fit: true   // 100% fit in a container
-									});
-								});
-							</script>
-							<div id="OR" class="hidden-xs">OR</div>
-						</div>
-						<div class="col-md-4 modal_body_right modal_body_right1">
-							<div class="row text-center sign-with">
-								<div class="col-md-12">
-									<h3 class="other-nw">Sign in with</h3>
-								</div>
-								<div class="col-md-12">
-									<ul class="social">
-										<li class="social_facebook"><a href="#" class="entypo-facebook"></a></li>
-										<li class="social_dribbble"><a href="#" class="entypo-dribbble"></a></li>
-										<li class="social_twitter"><a href="#" class="entypo-twitter"></a></li>
-										<li class="social_behance"><a href="#" class="entypo-behance"></a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script>
-		$('#myModal88').modal('show');
-	</script>
+	
 	<!-- header modal -->
 	<!-- header -->
 	<div class="header" id="home1">
 		<div class="container">
+		<?php session_start(); 
+		if($_SESSION['auth']==false){?>
 			<div class="w3l_login">
-				<a href="#" data-toggle="modal" data-target="#myModal88"><span class="glyphicon glyphicon-user"
-						aria-hidden="true"></span></a>
+				<a href="sign_in_up.php" ><span class="glyphicon glyphicon-user" aria-hidden="true"><br>Register</span></a>
 			</div>
+		<?php } else{?>
+			<div class="w3l_login">
+				<a href="#" data-toggle="modal" data-target="#myModal88"><span class="glyphicon glyphicon-user" aria-hidden="true"><br> Account</span></a>
+				Hi, <?php echo $_SESSION['userfname']; ?>
+			</div><?php }?>
 			<div class="w3l_logo">
-				<h1><a href="index.html">Electronic Store<span>Your stores. Your place.</span></a></h1>
+				<h1><a href="index.php">Electronic Store<span>Your stores. Your place.</span></a></h1>
 			</div>
 			<div class="search">
-				<input class="search_box" type="checkbox" id="search_box">
-				<label class="icon-search" for="search_box"><span class="glyphicon glyphicon-search"
-						aria-hidden="true"></span></label>
+				<input class="search_box" name="search" type="checkbox" id="search_box">
+				<label class="icon-search" for="search_box"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></label>
 				<div class="search_form">
-					<form action="#" method="post">
-						<input type="text" name="Search" placeholder="Search...">
+					<form action="search_integration.php" method="post">
+						<input type="text" name="search" placeholder="Search...">
 						<input type="submit" value="Send">
 					</form>
 				</div>
+				<div id="display"></div>
 			</div>
 			<div class="cart cart box_1">
 				<form action="#" method="post" class="last">
 					<input type="hidden" name="cmd" value="_cart" />
 					<input type="hidden" name="display" value="1" />
-					<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down"
-							aria-hidden="true"></i></button>
+					<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
 				</form>
+				<form method="post">
+					<input type="submit" name="sign-out" value="sign-out">
+				</form>
+				<?php if(isset($_POST['sign-out'])){
+					$flag=1;
+					session_destroy();
+					header("Location:sign_in_up.php?flag=$flag");
+				} ?>
 			</div>
 		</div>
 	</div>
@@ -232,8 +147,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<nav class="navbar navbar-default">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header nav_2">
-					<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse"
-						data-target="#bs-megadropdown-tabs">
+					<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
 						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -242,38 +156,37 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 					<ul class="nav navbar-nav">
-						<li><a href="index.html" class="act">Home</a></li>
+						<li><a href="index.php" class="act">Home</a></li>
 						<!-- Mega Menu -->
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b
-									class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
 							<ul class="dropdown-menu multi-column columns-3">
 								<div class="row">
 									<div class="col-sm-3">
 										<ul class="multi-column-dropdown">
 											<h6>Mobiles</h6>
-											<li><a href="products.html">Mobile Phones</a></li>
-											<li><a href="products.html">Mp3 Players <span>New</span></a></li>
-											<li><a href="products.html">Popular Models</a></li>
-											<li><a href="products.html">All Tablets<span>New</span></a></li>
+											<li><a href="products.php">Mobile Phones</a></li>
+											<li><a href="products.php">Mp3 Players <span>New</span></a></li>
+											<li><a href="products.php">Popular Models</a></li>
+											<li><a href="products.php">All Tablets<span>New</span></a></li>
 										</ul>
 									</div>
 									<div class="col-sm-3">
 										<ul class="multi-column-dropdown">
 											<h6>Accessories</h6>
-											<li><a href="products1.html">Laptop</a></li>
-											<li><a href="products1.html">Desktop</a></li>
-											<li><a href="products1.html">Wearables <span>New</span></a></li>
-											<li><a href="products1.html"><i>Summer Store</i></a></li>
+											<li><a href="products1.php">Laptop</a></li>
+											<li><a href="products1.php">Desktop</a></li>
+											<li><a href="products1.php">Wearables <span>New</span></a></li>
+											<li><a href="products1.php"><i>Summer Store</i></a></li>
 										</ul>
 									</div>
 									<div class="col-sm-2">
 										<ul class="multi-column-dropdown">
 											<h6>Home</h6>
-											<li><a href="products2.html">Tv</a></li>
-											<li><a href="products2.html">Camera</a></li>
-											<li><a href="products2.html">AC</a></li>
-											<li><a href="products2.html">Grinders</a></li>
+											<li><a href="products2.php">Tv</a></li>
+											<li><a href="products2.php">Camera</a></li>
+											<li><a href="products2.php">AC</a></li>
+											<li><a href="products2.php">Grinders</a></li>
 										</ul>
 									</div>
 									<div class="col-sm-4">
@@ -286,15 +199,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								</div>
 							</ul>
 						</li>
-						<li><a href="about.html">About Us</a></li>
-						<li class="w3pages"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-								aria-haspopup="true" aria-expanded="false">Pages <span class="caret"></span></a>
+						<li><a href="about.php">About Us</a></li>
+						<li class="w3pages"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="icons.html">Web Icons</a></li>
-								<li><a href="codes.html">Short Codes</a></li>
+								<li><a href="icons.php">Web Icons</a></li>
+								<li><a href="codes.php">Short Codes</a></li>
 							</ul>
 						</li>
-						<li><a href="mail.html">Mail Us</a></li>
+						<li><a href="mail.php">Mail Us</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -324,7 +236,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<iframe src="https://www.youtube.com/embed/ZQa6GUVnbNM"></iframe>
 				</div>
 				<script>
-					$(document).ready(function () {
+					$(document).ready(function() {
 						$('.popup-with-zoom-anim').magnificPopup({
 							type: 'inline',
 							fixedContentPos: false,
@@ -343,16 +255,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="col-md-7 wthree_banner_bottom_right">
 				<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
 					<ul id="myTab" class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active"><a href="#home" id="home-tab" role="tab"
-								data-toggle="tab" aria-controls="home">Mobiles</a></li>
-						<li role="presentation"><a href="#audio" role="tab" id="audio-tab" data-toggle="tab"
-								aria-controls="audio">Audio</a></li>
-						<li role="presentation"><a href="#video" role="tab" id="video-tab" data-toggle="tab"
-								aria-controls="video">Computer</a></li>
-						<li role="presentation"><a href="#tv" role="tab" id="tv-tab" data-toggle="tab"
-								aria-controls="tv">Household</a></li>
-						<li role="presentation"><a href="#kitchen" role="tab" id="kitchen-tab" data-toggle="tab"
-								aria-controls="kitchen">Kitchen</a></li>
+						<li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home">Mobiles</a></li>
+						<li role="presentation"><a href="#audio" role="tab" id="audio-tab" data-toggle="tab" aria-controls="audio">Audio</a></li>
+						<li role="presentation"><a href="#video" role="tab" id="video-tab" data-toggle="tab" aria-controls="video">Computer</a></li>
+						<li role="presentation"><a href="#tv" role="tab" id="tv-tab" data-toggle="tab" aria-controls="tv">Household</a></li>
+						<li role="presentation"><a href="#kitchen" role="tab" id="kitchen-tab" data-toggle="tab" aria-controls="kitchen">Kitchen</a></li>
 					</ul>
 					<div id="myTabContent" class="tab-content">
 						<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
@@ -370,14 +277,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal"><span
-															class="glyphicon glyphicon-eye-open"
-															aria-hidden="true"></span></a>
+													<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<h5><a href="single.html">Mobile Phone1</a></h5>
+									<h5><a href="single.php">Mobile Phone1</a></h5>
 									<div class="simpleCart_shelfItem">
 										<p><span>$380</span> <i class="item_price">$350</i></p>
 										<form action="#" method="post">
@@ -402,14 +307,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal"><span
-															class="glyphicon glyphicon-eye-open"
-															aria-hidden="true"></span></a>
+													<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<h5><a href="single.html">Mobile Phone2</a></h5>
+									<h5><a href="single.php">Mobile Phone2</a></h5>
 									<div class="simpleCart_shelfItem">
 										<p><span>$330</span> <i class="item_price">$302</i></p>
 										<form action="#" method="post">
@@ -434,14 +337,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal"><span
-															class="glyphicon glyphicon-eye-open"
-															aria-hidden="true"></span></a>
+													<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<h5><a href="single.html">Mobile Phone3</a></h5>
+									<h5><a href="single.php">Mobile Phone3</a></h5>
 									<div class="simpleCart_shelfItem">
 										<p><span>$250</span> <i class="item_price">$245</i></p>
 										<form action="#" method="post">
@@ -471,14 +372,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal1"><span
-															class="glyphicon glyphicon-eye-open"
-															aria-hidden="true"></span></a>
+													<a href="#" data-toggle="modal" data-target="#myModal1"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<h5><a href="single.html">Speakers</a></h5>
+									<h5><a href="single.php">Speakers</a></h5>
 									<p><span>$320</span> <i class="item_price">$250</i></p>
 									<div class="simpleCart_shelfItem">
 										<form action="#" method="post">
@@ -503,14 +402,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal1"><span
-															class="glyphicon glyphicon-eye-open"
-															aria-hidden="true"></span></a>
+													<a href="#" data-toggle="modal" data-target="#myModal1"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<h5><a href="single.html">Headphones</a></h5>
+									<h5><a href="single.php">Headphones</a></h5>
 									<div class="simpleCart_shelfItem">
 										<p><span>$180</span> <i class="item_price">$150</i></p>
 										<form action="#" method="post">
@@ -535,14 +432,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal1"><span
-															class="glyphicon glyphicon-eye-open"
-															aria-hidden="true"></span></a>
+													<a href="#" data-toggle="modal" data-target="#myModal1"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<h5><a href="single.html">Audio Player</a></h5>
+									<h5><a href="single.php">Audio Player</a></h5>
 									<div class="simpleCart_shelfItem">
 										<p><span>$220</span> <i class="item_price">$180</i></p>
 										<form action="#" method="post">
@@ -572,14 +467,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal2"><span
-															class="glyphicon glyphicon-eye-open"
-															aria-hidden="true"></span></a>
+													<a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<h5><a href="single.html">Laptop</a></h5>
+									<h5><a href="single.php">Laptop</a></h5>
 									<div class="simpleCart_shelfItem">
 										<p><span>$880</span> <i class="item_price">$850</i></p>
 										<form action="#" method="post">
@@ -604,14 +497,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal2"><span
-															class="glyphicon glyphicon-eye-open"
-															aria-hidden="true"></span></a>
+													<a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<h5><a href="single.html">Notebook</a></h5>
+									<h5><a href="single.php">Notebook</a></h5>
 									<div class="simpleCart_shelfItem">
 										<p><span>$290</span> <i class="item_price">$280</i></p>
 										<form action="#" method="post">
@@ -636,14 +527,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal2"><span
-															class="glyphicon glyphicon-eye-open"
-															aria-hidden="true"></span></a>
+													<a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<h5><a href="single.html">Kid's Toy</a></h5>
+									<h5><a href="single.php">Kid's Toy</a></h5>
 									<div class="simpleCart_shelfItem">
 										<p><span>$120</span> <i class="item_price">$80</i></p>
 										<form action="#" method="post">
@@ -673,14 +562,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal3"><span
-															class="glyphicon glyphicon-eye-open"
-															aria-hidden="true"></span></a>
+													<a href="#" data-toggle="modal" data-target="#myModal3"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<h5><a href="single.html">Refrigerator</a></h5>
+									<h5><a href="single.php">Refrigerator</a></h5>
 									<div class="simpleCart_shelfItem">
 										<p><span>$950</span> <i class="item_price">$820</i></p>
 										<form action="#" method="post">
@@ -705,14 +592,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal3"><span
-															class="glyphicon glyphicon-eye-open"
-															aria-hidden="true"></span></a>
+													<a href="#" data-toggle="modal" data-target="#myModal3"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<h5><a href="single.html">LED Tv</a></h5>
+									<h5><a href="single.php">LED Tv</a></h5>
 									<div class="simpleCart_shelfItem">
 										<p><span>$700</span> <i class="item_price">$680</i></p>
 										<form action="#" method="post">
@@ -737,14 +622,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal3"><span
-															class="glyphicon glyphicon-eye-open"
-															aria-hidden="true"></span></a>
+													<a href="#" data-toggle="modal" data-target="#myModal3"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<h5><a href="single.html">Washing Machine</a></h5>
+									<h5><a href="single.php">Washing Machine</a></h5>
 									<div class="simpleCart_shelfItem">
 										<p><span>$520</span> <i class="item_price">$510</i></p>
 										<form action="#" method="post">
@@ -774,14 +657,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal4"><span
-															class="glyphicon glyphicon-eye-open"
-															aria-hidden="true"></span></a>
+													<a href="#" data-toggle="modal" data-target="#myModal4"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<h5><a href="single.html">Grinder</a></h5>
+									<h5><a href="single.php">Grinder</a></h5>
 									<div class="simpleCart_shelfItem">
 										<p><span>$460</span> <i class="item_price">$450</i></p>
 										<form action="#" method="post">
@@ -806,14 +687,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal4"><span
-															class="glyphicon glyphicon-eye-open"
-															aria-hidden="true"></span></a>
+													<a href="#" data-toggle="modal" data-target="#myModal4"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<h5><a href="single.html">Water Purifier</a></h5>
+									<h5><a href="single.php">Water Purifier</a></h5>
 									<div class="simpleCart_shelfItem">
 										<p><span>$390</span> <i class="item_price">$350</i></p>
 										<form action="#" method="post">
@@ -838,14 +717,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal4"><span
-															class="glyphicon glyphicon-eye-open"
-															aria-hidden="true"></span></a>
+													<a href="#" data-toggle="modal" data-target="#myModal4"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<h5><a href="single.html">Coffee Maker</a></h5>
+									<h5><a href="single.php">Coffee Maker</a></h5>
 									<div class="simpleCart_shelfItem">
 										<p><span>$250</span> <i class="item_price">$220</i></p>
 										<form action="#" method="post">
@@ -872,8 +749,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-							aria-hidden="true">&times;</span></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				</div>
 				<section>
 					<div class="modal-body">
@@ -933,8 +809,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-							aria-hidden="true">&times;</span></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				</div>
 				<section>
 					<div class="modal-body">
@@ -998,8 +873,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-							aria-hidden="true">&times;</span></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				</div>
 				<section>
 					<div class="modal-body">
@@ -1060,8 +934,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-							aria-hidden="true">&times;</span></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				</div>
 				<section>
 					<div class="modal-body">
@@ -1121,8 +994,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-							aria-hidden="true">&times;</span></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				</div>
 				<section>
 					<div class="modal-body">
@@ -1184,8 +1056,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-							aria-hidden="true">&times;</span></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				</div>
 				<section>
 					<div class="modal-body">
@@ -1247,8 +1118,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-							aria-hidden="true">&times;</span></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				</div>
 				<section>
 					<div class="modal-body">
@@ -1314,7 +1184,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="agileinfo_banner_bottom1_grids">
 			<div class="col-md-7 agileinfo_banner_bottom1_grid_left">
 				<h3>Grand Opening Event With flat<span>20% <i>Discount</i></span></h3>
-				<a href="products.html">Shop Now</a>
+				<a href="products.php">Shop Now</a>
 			</div>
 			<div class="col-md-5 agileinfo_banner_bottom1_grid_right">
 				<h4>hot deal</h4>
@@ -1382,7 +1252,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div>
 					<script src="js/jquery.wmuSlider.js"></script>
 					<script>
-						$('.example1').wmuSlider();         
+						$('.example1').wmuSlider();
 					</script>
 				</div>
 				<div class="col-md-5 w3agile_special_deals_grid_right">
@@ -1413,13 +1283,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<div class="w3_hs_bottom w3_hs_bottom_sub">
 								<ul>
 									<li>
-										<a href="#" data-toggle="modal" data-target="#myModal2"><span
-												class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+										<a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 									</li>
 								</ul>
 							</div>
 						</div>
-						<h5><a href="single.html">Laptops</a></h5>
+						<h5><a href="single.php">Laptops</a></h5>
 						<div class="simpleCart_shelfItem">
 							<p><span>$520</span> <i class="item_price">$500</i></p>
 							<form action="#" method="post">
@@ -1443,13 +1312,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<div class="w3_hs_bottom w3_hs_bottom_sub">
 								<ul>
 									<li>
-										<a href="#" data-toggle="modal" data-target="#myModal"><span
-												class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+										<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 									</li>
 								</ul>
 							</div>
 						</div>
-						<h5><a href="single.html">Black Phone</a></h5>
+						<h5><a href="single.php">Black Phone</a></h5>
 						<div class="simpleCart_shelfItem">
 							<p><span>$380</span> <i class="item_price">$370</i></p>
 							<form action="#" method="post">
@@ -1473,13 +1341,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<div class="w3_hs_bottom w3_hs_bottom_sub">
 								<ul>
 									<li>
-										<a href="#" data-toggle="modal" data-target="#myModal5"><span
-												class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+										<a href="#" data-toggle="modal" data-target="#myModal5"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 									</li>
 								</ul>
 							</div>
 						</div>
-						<h5><a href="single.html">Kids Toy</a></h5>
+						<h5><a href="single.php">Kids Toy</a></h5>
 						<div class="simpleCart_shelfItem">
 							<p><span>$150</span> <i class="item_price">$100</i></p>
 							<form action="#" method="post">
@@ -1503,13 +1370,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<div class="w3_hs_bottom w3_hs_bottom_sub">
 								<ul>
 									<li>
-										<a href="#" data-toggle="modal" data-target="#myModal6"><span
-												class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+										<a href="#" data-toggle="modal" data-target="#myModal6"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 									</li>
 								</ul>
 							</div>
 						</div>
-						<h5><a href="single.html">Induction Stove</a></h5>
+						<h5><a href="single.php">Induction Stove</a></h5>
 						<div class="simpleCart_shelfItem">
 							<p><span>$280</span> <i class="item_price">$250</i></p>
 							<form action="#" method="post">
@@ -1551,7 +1417,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</ul>
 			</div>
 			<script type="text/javascript">
-				$(window).load(function () {
+				$(window).load(function() {
 					$("#flexiselDemo1").flexisel({
 						visibleItems: 4,
 						animationSpeed: 1000,
@@ -1609,36 +1475,35 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block,
 							<span>New York City.</span>
 						</li>
-						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
-								href="mailto:info@example.com">info@example.com</a></li>
+						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
 						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
 					</ul>
 				</div>
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Information</h3>
 					<ul class="info">
-						<li><a href="about.html">About Us</a></li>
-						<li><a href="mail.html">Contact Us</a></li>
-						<li><a href="codes.html">Short Codes</a></li>
-						<li><a href="faq.html">FAQ's</a></li>
-						<li><a href="products.html">Special Products</a></li>
+						<li><a href="about.php">About Us</a></li>
+						<li><a href="mail.php">Contact Us</a></li>
+						<li><a href="codes.php">Short Codes</a></li>
+						<li><a href="faq.php">FAQ's</a></li>
+						<li><a href="products.php">Special Products</a></li>
 					</ul>
 				</div>
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Category</h3>
 					<ul class="info">
-						<li><a href="products.html">Mobiles</a></li>
-						<li><a href="products1.html">Laptops</a></li>
-						<li><a href="products.html">Purifiers</a></li>
-						<li><a href="products1.html">Wearables</a></li>
-						<li><a href="products2.html">Kitchen</a></li>
+						<li><a href="products.php">Mobiles</a></li>
+						<li><a href="products1.php">Laptops</a></li>
+						<li><a href="products.php">Purifiers</a></li>
+						<li><a href="products1.php">Wearables</a></li>
+						<li><a href="products2.php">Kitchen</a></li>
 					</ul>
 				</div>
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Profile</h3>
 					<ul class="info">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="products.html">Today's Deals</a></li>
+						<li><a href="index.php">Home</a></li>
+						<li><a href="products.php">Today's Deals</a></li>
 					</ul>
 					<h4>Follow Us</h4>
 					<div class="agileits_social_button">
@@ -1660,8 +1525,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 			</div>
 			<div class="container">
-				<p>&copy; 2017 Electronic Store. All rights reserved | Design by <a
-						href="http://w3layouts.com/">W3layouts</a></p>
+				<p>&copy; 2017 Electronic Store. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
 			</div>
 		</div>
 	</div>
@@ -1671,14 +1535,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script>
 		w3ls.render();
 
-		w3ls.cart.on('w3sb_checkout', function (evt) {
+		w3ls.cart.on('w3sb_checkout', function(evt) {
 			var items, len, i;
 
 			if (this.subtotal() > 0) {
 				items = this.items();
 
-				for (i = 0, len = items.length; i < len; i++) {
-				}
+				for (i = 0, len = items.length; i < len; i++) {}
 			}
 		});
 	</script>

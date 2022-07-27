@@ -2,6 +2,8 @@
 
     $email = $_POST['Email'];
     $password = $_POST['Password'];
+
+
    
     $connection = new mysqli("localhost", "admin", "admin", "dbpost");
     if ($connection->connect_error) {
@@ -15,16 +17,23 @@
 
     $array=mysqli_fetch_assoc($result);
 
+    session_start();
+    $_SESSION['auth']=false;
+
         if ($rows == 1) {
-            session_start();
             $_SESSION['userfname']=$array['UserFirstName'];
             $_SESSION['userlname']=$array['UserLastName'];
             $_SESSION['user_id']=$array['UserID'];
+            $_SESSION['useremail']=$array['UserEmail'];
             $_SESSION['usercontact']=$array['UserPhone'];
-            $_SESSION['isset']=true;
-            header("Location: account.php");
+            $_SESSION['login']="Login successeful";
+            $_SESSION['auth']=true;
+            header("Location: user_account.php");
 
         } else {
-            header("Location:index.php");
+
+            $_SESSION['auth']=false;
+            $_SESSION['login']="Login failed";
+            header("Location:sign_in_up.php");
         }
     ?>
