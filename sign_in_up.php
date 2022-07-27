@@ -46,6 +46,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- //web fonts -->
 	<!-- start-smooth-scrolling -->
 	<script type="text/javascript">
+		
 		jQuery(document).ready(function($) {
 			$('#blur').fadeOut(8000);
 			$('#blurr').fadeOut(8000);
@@ -117,8 +118,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div id="blurr" style="background-color: red;width: 100%;text-align: center;">
 										<p style="font-size:20px; ;">
 											<?php
-											echo "Registration Compleated";  
-											$flagg+=1;
+											echo "Registration Compleated";
+											header("Refresh: 8; URL=sign_in_up.php");  
+
 											?>
 										</p>
 									</div>
@@ -128,8 +130,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<p style="font-size:20px; ;">
 											<?php
 											echo "User Already Exist";
-											$flagg+=1;
-											
+											header("Refresh: 8; URL=sign_in_up.php");  
+
 											?>
 										</p>
 									</div>
@@ -150,7 +152,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div id="hide" style="background-color: red;width: 100%;text-align: center;">
 										<p style="font-size:20px; ;">
 											<?php
-											echo "Logged-out successful";  
+											echo "Logged-out successful"; 
+											header("Refresh: 8; URL=index.php");  
+
 											?>
 										</p>
 									</div>

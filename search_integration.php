@@ -38,16 +38,28 @@
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 
     <?php
+    session_start();
     $keyword = $_POST['search'];
-
+    $_SESSION['key']=$keyword;
     $connection = new mysqli("localhost", "admin", "admin", "dbpost");
-
-    $search = "SELECT * FROM products WHERE ProductName LIKE '%$keyword%' OR ProductCartDesc LIKE '%$keyword%';";
-    $table = mysqli_query($connection, $search);
-
-    $special = "SELECT * FROM products;";
+    $special = "SELECT * FROM products WHERE ProductName LIKE '%$keyword%' OR ProductSKU LIKE '%$keyword%'";
+    
     $tablespecial = mysqli_query($connection, $special);
-    $number_of_products = mysqli_num_rows($table);
+   
+
+
+    $total = mysqli_num_rows($tablespecial);
+
+    $limit=6;
+
+    
+
+    if(isset($_GET['page'])){
+        $page=$_GET['page'];
+    }else{
+        $page=1;
+    }
+
 
     ?>
 </head>
@@ -87,9 +99,13 @@
                     <input type="hidden" name="display" value="1" />
                     <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
                 </form>
-                <form method="post">
-                    <input type="submit" name="sign-out" value="sign-out">
-                </form>
+				<?php session_start(); 
+				if($_SESSION['auth']){ ?>
+				<form method="post">
+					<input type="submit" name="sign-out" value="sign-out">
+				</form>
+				<?php }?>
+
                 <?php if (isset($_POST['sign-out'])) {
                     $flag = 1;
                     session_destroy();
@@ -170,198 +186,186 @@
         </div>
     </div>
 
-    <?php if ($keyword == "*") {
-        while ($row = mysqli_fetch_array($tablespecial, MYSQLI_ASSOC)) {
+    <br><br>
+    <center>
+        <label style="font-size:30px ;">You have searched for :<span style="color:Blue ;"> <?php session_start(); echo $_SESSION['key'] ?></span></label><br><br>
+    </center>
+    <?php if(strlen($keyword)>2){
+     $offset = ($page-1)*$limit;
+    $pages = ceil ($total / $limit);
+    
+            if($total>$limit){
+
+            ?>
+            <ul class="pagination pt-2 pd-5" style="align-items: center;
+    justify-content: center;
+    display: flex;">
+                <?php
+                for($i=1;$i<=$pages;$i++){ 
+                    ?>
+                    <li class="page-item <?= ($i==$page)?$active='active':'';?>">
+                        <a href="search_integration.php?keyword=<?=$keyword?>&page=<?=$i?>" class="page-link">
+                            <?= $i ?>
+                        </a>
+                    </li>
+                <?php } ?>
+            </ul>
+
+            <?php } ?>
+            <?php
+           
+        //Offset to limit show
+   $special1 = "SELECT * FROM products WHERE ProductName like '%$keyword%' OR ProductSKU LIKE '%$keyword%' LIMIT $offset,$limit";
+
+   $tablespecial1 = mysqli_query($connection, $special1);
+   ?>
+           
+    <?php while ($row = mysqli_fetch_array($tablespecial1)) {
     ?>
-            <div class="w3ls_mobiles_grid_right_grid3">
-                <div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_mobiles">
-                    <div class="agile_ecommerce_tab_left mobiles_grid">
-                        <div class="hs-wrapper hs-wrapper2">
-                            <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
-                            <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
-                            <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
-                            <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
-                            <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
-                            <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
-                            <div class="w3_hs_bottom w3_hs_bottom_sub1">
-                                <ul>
-                                    <li>
-                                        <a href="#" data-toggle="modal" data-target="#myModal9"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-                                    </li>
-                                </ul>
-                            </div>
+        <div class="w3ls_mobiles_grid_right_grid3">
+            <div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_mobiles">
+                <div class="agile_ecommerce_tab_left mobiles_grid">
+                    <div class="hs-wrapper hs-wrapper2">
+                        <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
+                        <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
+                        <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
+                        <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
+                        <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
+                        <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
+                        <div class="w3_hs_bottom w3_hs_bottom_sub1">
+                            <ul>
+                                <li>
+                                    <a href="#" data-toggle="modal" data-target="#myModal9"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                                </li>
+                            </ul>
                         </div>
-                        <h5><a href="#"><?php echo $row['ProductName']; ?></a></h5>
-                        <div class="simpleCart_shelfItem">
-                            <p><span>$250</span> <i class="item_price"><?php echo $row['ProductPrice']; ?></i></p>
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart" />
-                                <input type="hidden" name="add" value="1" />
-                                <input type="hidden" name="w3ls_item" value="<?php echo $row['ProductName']; ?>" />
-                                <input type="hidden" name="amount" value="<?php echo $row['ProductPrice']; ?>" />
-                                <button type="submit" class="w3ls-cart">Add to cart</button>
-                            </form>
-                        </div>
-                        <div class="mobiles_grid_pos">
-                            <h6>New</h6>
-                        </div>
+                    </div>
+                    <h5><a href="#"><?php echo $row['ProductName']; ?></a></h5>
+                    <div class="simpleCart_shelfItem">
+                        <p><span>$250</span> <i class="item_price"><?php echo $row['ProductPrice']; ?></i></p>
+                        <form action="#" method="post">
+                            <input type="hidden" name="cmd" value="_cart" />
+                            <input type="hidden" name="add" value="1" />
+                            <input type="hidden" name="w3ls_item" value="<?php echo $row['ProductName']; ?>" />
+                            <input type="hidden" name="amount" value="245.00" />
+                            <button type="submit" class="w3ls-cart">Add to cart</button>
+                        </form>
+                    </div>
+                    <div class="mobiles_grid_pos">
+                        <h6>New</h6>
                     </div>
                 </div>
-
-            <?php
-        }
-    } else if (strlen($keyword) > 2) { ?>
-            <br><br>
-            <center>
-                <label style="font-size:30px ;">You have searched for :<span style="color:Blue ;"> <?php echo $keyword ?></span></label><br><br>
-            </center>
-            <?php while ($row = mysqli_fetch_array($table, MYSQLI_ASSOC)) {
-                $i++;
-                if ($i < 9) {
-            ?>
-                    <div class="w3ls_mobiles_grid_right_grid3">
-                        <div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_mobiles">
-                            <div class="agile_ecommerce_tab_left mobiles_grid">
-                                <div class="hs-wrapper hs-wrapper2">
-                                    <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
-                                    <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
-                                    <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
-                                    <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
-                                    <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
-                                    <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProductImage']); ?>">
-                                    <div class="w3_hs_bottom w3_hs_bottom_sub1">
-                                        <ul>
-                                            <li>
-                                                <a href="#" data-toggle="modal" data-target="#myModal9"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <h5><a href="#"><?php echo $row['ProductName']; ?></a></h5>
-                                <div class="simpleCart_shelfItem">
-                                    <p><span>$250</span> <i class="item_price"><?php echo $row['ProductPrice']; ?></i></p>
-                                    <form action="#" method="post">
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="w3ls_item" value="<?php echo $row['ProductName']; ?>" />
-                                        <input type="hidden" name="amount" value="245.00" />
-                                        <button type="submit" class="w3ls-cart">Add to cart</button>
-                                    </form>
-                                </div>
-                                <div class="mobiles_grid_pos">
-                                    <h6>New</h6>
-                                </div>
-                            </div>
-                        </div>
-                <?php
-                }
-            }
-                ?>
-
-            <?php } else { ?> <br><br>
-                <center>
-                    <div style="background-color:pink; width:25%;" id="3char"><?php echo "Please enter atleast 3 charactors for search";
-                                                                            } ?></div>
-                </center><br><br>
-                <script>
-                    jQuery(document).ready(function($) {
-                        $('#3char').fadeOut(8000);
-                    });
-                </script>
-
-
-
-                <?php if ($number_of_products == 0) { ?>
-                    <center>
-                        <div style="background-color:pink; width:25%;" id="noproducts"><?php echo "No result Found for this search";
-                                                                                    } ?></div>
-                    </center><br><br>
-                    <script>
-                        jQuery(document).ready(function($) {
-                            $('#noproducts').fadeOut(8000);
-                        });
-                    </script>
-                    <div class="footer">
-                        <div class="container">
-                            <div class="w3_footer_grids">
-                                <div class="col-md-3 w3_footer_grid">
-                                    <h3>Contact</h3>
-                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
-                                    <ul class="address">
-                                        <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block,
-                                            <span>New York City.</span>
-                                        </li>
-                                        <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
-                                        <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-3 w3_footer_grid">
-                                    <h3>Information</h3>
-                                    <ul class="info">
-                                        <li><a href="about.php">About Us</a></li>
-                                        <li><a href="mail.php">Contact Us</a></li>
-                                        <li><a href="codes.php">Short Codes</a></li>
-                                        <li><a href="faq.php">FAQ's</a></li>
-                                        <li><a href="products.php">Special Products</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-3 w3_footer_grid">
-                                    <h3>Category</h3>
-                                    <ul class="info">
-                                        <li><a href="products.php">Mobiles</a></li>
-                                        <li><a href="products1.php">Laptops</a></li>
-                                        <li><a href="products.php">Purifiers</a></li>
-                                        <li><a href="products1.php">Wearables</a></li>
-                                        <li><a href="products2.php">Kitchen</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-3 w3_footer_grid">
-                                    <h3>Profile</h3>
-                                    <ul class="info">
-                                        <li><a href="index.php">Home</a></li>
-                                        <li><a href="products.php">Today's Deals</a></li>
-                                    </ul>
-                                    <h4>Follow Us</h4>
-                                    <div class="agileits_social_button">
-                                        <ul>
-                                            <li><a href="#" class="facebook"> </a></li>
-                                            <li><a href="#" class="twitter"> </a></li>
-                                            <li><a href="#" class="google"> </a></li>
-                                            <li><a href="#" class="pinterest"> </a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                        <div class="footer-copy">
-                            <div class="footer-copy1">
-                                <div class="footer-copy-pos">
-                                    <a href="#home1" class="scroll"><img src="images/arrow.png" alt=" " class="img-responsive" /></a>
-                                </div>
-                            </div>
-                            <div class="container">
-                                <p>&copy; 2017 Electronic Store. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
-                            </div>
+            </div>
+        <?php
+    }
+}
+else if(strlen($keyword)<=2){
+        ?>
+        <center>
+            <div style="background-color:pink; width:25%;" id="3char">
+                <?php echo "Please enter atleast 3 charactors for search"; ?>
+            </div>
+        </center><br><br>
+        <script>
+            jQuery(document).ready(function($) {
+                $('#3char').fadeOut(8000);
+            });
+        </script>
+<?php }
+if($total==0){
+    ?>
+     <center>
+            <div style="background-color:pink; width:25%;" id="char">
+                <?php echo "No Result found for this Search"; ?>
+            </div>
+        </center><br><br>
+        <script>
+            jQuery(document).ready(function($) {
+                $('#char').fadeOut(8000);
+            });
+        </script>
+<?php }?>
+        <div class="footer">
+            <div class="container">
+                <div class="w3_footer_grids">
+                    <div class="col-md-3 w3_footer_grid">
+                        <h3>Contact</h3>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+                        <ul class="address">
+                            <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block,
+                                <span>New York City.</span>
+                            </li>
+                            <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
+                            <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 w3_footer_grid">
+                        <h3>Information</h3>
+                        <ul class="info">
+                            <li><a href="about.php">About Us</a></li>
+                            <li><a href="mail.php">Contact Us</a></li>
+                            <li><a href="codes.php">Short Codes</a></li>
+                            <li><a href="faq.php">FAQ's</a></li>
+                            <li><a href="products.php">Special Products</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 w3_footer_grid">
+                        <h3>Category</h3>
+                        <ul class="info">
+                            <li><a href="products.php">Mobiles</a></li>
+                            <li><a href="products1.php">Laptops</a></li>
+                            <li><a href="products.php">Purifiers</a></li>
+                            <li><a href="products1.php">Wearables</a></li>
+                            <li><a href="products2.php">Kitchen</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 w3_footer_grid">
+                        <h3>Profile</h3>
+                        <ul class="info">
+                            <li><a href="index.php">Home</a></li>
+                            <li><a href="products.php">Today's Deals</a></li>
+                        </ul>
+                        <h4>Follow Us</h4>
+                        <div class="agileits_social_button">
+                            <ul>
+                                <li><a href="#" class="facebook"> </a></li>
+                                <li><a href="#" class="twitter"> </a></li>
+                                <li><a href="#" class="google"> </a></li>
+                                <li><a href="#" class="pinterest"> </a></li>
+                            </ul>
                         </div>
                     </div>
-                    <!-- //footer -->
-                    <!-- cart-js -->
-                    <script src="js/minicart.js"></script>
-                    <script>
-                        w3ls.render();
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            <div class="footer-copy">
+                <div class="footer-copy1">
+                    <div class="footer-copy-pos">
+                        <a href="#home1" class="scroll"><img src="images/arrow.png" alt=" " class="img-responsive" /></a>
+                    </div>
+                </div>
+                <div class="container">
+                    <p>&copy; 2017 Electronic Store. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- //footer -->
+        <!-- cart-js -->
+        <script src="js/minicart.js"></script>
+        <script>
+            w3ls.render();
 
-                        w3ls.cart.on('w3sb_checkout', function(evt) {
-                            var items, len, i;
+            w3ls.cart.on('w3sb_checkout', function(evt) {
+                var items, len, i;
 
-                            if (this.subtotal() > 0) {
-                                items = this.items();
+                if (this.subtotal() > 0) {
+                    items = this.items();
 
-                                for (i = 0, len = items.length; i < len; i++) {}
-                            }
-                        });
-                    </script>
-                    <!-- //cart-js -->
+                    for (i = 0, len = items.length; i < len; i++) {}
+                }
+            });
+        </script>
+        <!-- //cart-js -->
 </body>
 
 </html>
