@@ -41,6 +41,7 @@
     session_start();
     $keyword = $_POST['search'];
     $_SESSION['key']=$keyword;
+    
     $connection = new mysqli("localhost", "admin", "admin", "dbpost");
     $special = "SELECT * FROM products WHERE ProductName LIKE '%$keyword%' OR ProductSKU LIKE '%$keyword%'";
     
@@ -53,9 +54,10 @@
     $limit=6;
 
     
-
     if(isset($_GET['page'])){
         $page=$_GET['page'];
+    $keyword=$_GET['keyword'];
+
     }else{
         $page=1;
     }
@@ -188,9 +190,10 @@
 
     <br><br>
     <center>
-        <label style="font-size:30px ;">You have searched for :<span style="color:Blue ;"> <?php session_start(); echo $_SESSION['key'] ?></span></label><br><br>
+        <label style="font-size:30px ;">You have searched for :<span style="color:Blue ;"> <?php  echo $keyword; ?></span></label><br><br>
     </center>
-    <?php if(strlen($keyword)>2){
+    <?php 
+    if(strlen($keyword)>2){
      $offset = ($page-1)*$limit;
     $pages = ceil ($total / $limit);
     
@@ -219,7 +222,7 @@
 
    $tablespecial1 = mysqli_query($connection, $special1);
    ?>
-           
+<div style="display: grid;width:100%">
     <?php while ($row = mysqli_fetch_array($tablespecial1)) {
     ?>
         <div class="w3ls_mobiles_grid_right_grid3">
@@ -285,6 +288,8 @@ if($total==0){
             });
         </script>
 <?php }?>
+        </div>
+        </div>
         <div class="footer">
             <div class="container">
                 <div class="w3_footer_grids">
